@@ -8,9 +8,9 @@ namespace BookStore.Controllers
 {
     public class HomeController : Controller
     {
-            IBookRepository repo;
-            IOrder order;
-        
+        IBookRepository repo;
+        IOrder order;
+
         public HomeController(IBookRepository r, IOrder o)
         {
             repo = r;
@@ -33,6 +33,5 @@ namespace BookStore.Controllers
             repo.Dispose();
             base.Dispose(disposing);
         }
-    }
     }
 }

@@ -9,26 +9,26 @@ namespace BookStore.Infrastructure.Data
 {
     public class BookRepository : IBookRepository
     {
-        private OrderContext db;
+        private StoreContext db;
 
         public BookRepository()
         {
-            this.db = new OrderContext();
+            this.db = new StoreContext();
         }
 
         public IEnumerable<Book> GetBookList()
         {
-            return db.Books.ToList();
+            return db.Book.ToList();
         }
 
         public Book GetBook(int id)
         {
-            return db.Books.Find(id);
+            return db.Book.Find(id);
         }
 
         public void Create(Book book)
         {
-            db.Books.Add(book);
+            db.Book.Add(book);
         }
 
         public void Update(Book book)
@@ -38,9 +38,9 @@ namespace BookStore.Infrastructure.Data
 
         public void Delete(int id)
         {
-            Book book = db.Books.Find(id);
+            Book book = db.Book.Find(id);
             if (book != null)
-                db.Books.Remove(book);
+                db.Book.Remove(book);
         }
 
         public void Save()

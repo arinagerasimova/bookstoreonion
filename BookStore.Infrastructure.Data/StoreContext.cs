@@ -1,4 +1,5 @@
-﻿namespace BookStore.Infrastructure.Data
+﻿
+namespace BookStore.Infrastructure.Data
 {
     using System;
     using System.Data.Entity;
