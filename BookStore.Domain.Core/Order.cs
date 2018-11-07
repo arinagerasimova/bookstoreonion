@@ -6,43 +6,23 @@ namespace BookStore.Domain.Core
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Book")]
-    public partial class Book
+    [Table("Order")]
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Book()
+        public Order()
         {
             OrderItems = new HashSet<OrderItems>();
         }
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Title { get; set; }
-
-        public int AuthorId { get; set; }
-
-        public int GenreId { get; set; }
-
-        public int LanguageId { get; set; }
-
-        public int PublishHouseId { get; set; }
+        public int UserId { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime PublishYears { get; set; }
+        public DateTime? PaymentDate { get; set; }
 
-        public int NumbetOfPage { get; set; }
-
-        public string BookCharacteristic { get; set; }
-
-        public virtual Author Author { get; set; }
-
-        public virtual Genre Genre { get; set; }
-
-        public virtual Language Language { get; set; }
-
-        public virtual PublishHouse PublishHouse { get; set; }
+        public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }

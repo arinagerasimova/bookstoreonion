@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BookRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoreContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.Domain.Core\BookStore.Domain.Core.csproj">
