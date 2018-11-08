@@ -8,40 +8,39 @@ namespace BookStore.Infrastructure.Data
 {
     public class OrderRepository : IOrderRepository
     {
-        private StoreContext db;
+        private readonly StoreContext _db;
 
         public OrderRepository(StoreContext context)
         {
-            this.db = context;
+            _db = context;
         }
 
         public IEnumerable<OrderItem> GetBookList()
         {
-
-            return db.OrderItems.ToList();
+            return _db.OrderItems.ToList();
         }
 
         public OrderItem GetBook(int id)
         {
 
-            return db.OrderItems.Find(id);
+            return _db.OrderItems.Find(id);
         }
 
         public void Create(OrderItem order)
         {
-            db.OrderItems.Add(order);
+            _db.OrderItems.Add(order);
         }
 
         public void Update(OrderItem order)
         {
-            db.Entry(order).State = EntityState.Modified;
+            _db.Entry(order).State = EntityState.Modified;
         }
 
         public void Delete(int id)
         {
-            OrderItem order = db.OrderItems.Find(id);
+            var order = _db.OrderItems.Find(id);
             if (order != null)
-                db.OrderItems.Remove(order);
+                _db.OrderItems.Remove(order);
         }
     }
 }

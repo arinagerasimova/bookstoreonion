@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Infrastructure.Data
 {
-    class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable
     {
-        private StoreContext db = new StoreContext();
-        private BookRepository bookRepository;
-        private OrderRepository orderRepository;
-        private PurchaseRepository purchaseRepository;
+        private readonly StoreContext _db = new StoreContext();
+        private BookRepository _bookRepository;
+        private OrderRepository _orderRepository;
+        private PurchaseRepository _purchaseRepository;
 
         public BookRepository Books
         {
             get
             {
-                if (bookRepository == null)
-                    bookRepository = new BookRepository(db);
-                return bookRepository;
+                if (_bookRepository == null)
+                    _bookRepository = new BookRepository(_db);
+                return _bookRepository;
             }
         }
 
@@ -27,9 +23,9 @@ namespace BookStore.Infrastructure.Data
         {
             get
             {
-                if (orderRepository == null)
-                    orderRepository = new OrderRepository(db);
-                return orderRepository;
+                if (_orderRepository == null)
+                    _orderRepository = new OrderRepository(_db);
+                return _orderRepository;
             }
         }
 
@@ -37,15 +33,15 @@ namespace BookStore.Infrastructure.Data
         {
             get
             {
-                if (purchaseRepository == null)
-                    purchaseRepository = new PurchaseRepository(db);
-                return purchaseRepository;
+                if (_purchaseRepository == null)
+                    _purchaseRepository = new PurchaseRepository(_db);
+                return _purchaseRepository;
             }
         }
 
         public void Save()
         {
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         private bool disposed = false;
@@ -56,7 +52,7 @@ namespace BookStore.Infrastructure.Data
             {
                 if (disposing)
                 {
-                    db.Dispose();
+                    _db.Dispose();
                 }
                 this.disposed = true;
             }

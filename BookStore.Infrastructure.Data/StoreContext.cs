@@ -1,13 +1,10 @@
 ﻿
 namespace BookStore.Infrastructure.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
     using BookStore.Domain.Core;
 
-    public partial class StoreContext : DbContext
+    public class StoreContext : DbContext
     {
         public StoreContext()
              : base("name=StoreContext")

@@ -21,6 +21,7 @@ namespace BookStore.Controllers
             order = o;
             part = p;
         }
+
         public ActionResult Index()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<Book, ShortBookModel>());
