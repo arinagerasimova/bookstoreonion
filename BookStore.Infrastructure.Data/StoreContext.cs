@@ -10,18 +10,18 @@ namespace BookStore.Infrastructure.Data
     public partial class StoreContext : DbContext
     {
         public StoreContext()
-            : base("name=StoreContext")
+             : base("name=StoreContext")
         {
         }
 
-        public virtual DbSet<Author> Author { get; set; }
-        public virtual DbSet<Book> Book { get; set; }
-        public virtual DbSet<Genre> Genre { get; set; }
-        public virtual DbSet<Language> Language { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
-        public virtual DbSet<OrderItems> OrderItems { get; set; }
-        public virtual DbSet<PublishHouse> PublishHouse { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Author> Authors { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<PublishHouse> PublishHouses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace BookStore.Infrastructure.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<Author>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.Author)
                 .WillCascadeOnDelete(false);
 
@@ -47,6 +47,10 @@ namespace BookStore.Infrastructure.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<Book>()
+                .Property(e => e.Price)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Book>()
                 .HasMany(e => e.OrderItems)
                 .WithRequired(e => e.Book)
                 .WillCascadeOnDelete(false);
@@ -56,7 +60,7 @@ namespace BookStore.Infrastructure.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<Genre>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.Genre)
                 .WillCascadeOnDelete(false);
 
@@ -65,7 +69,7 @@ namespace BookStore.Infrastructure.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<Language>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.Language)
                 .WillCascadeOnDelete(false);
 
@@ -79,7 +83,7 @@ namespace BookStore.Infrastructure.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<PublishHouse>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.PublishHouse)
                 .WillCascadeOnDelete(false);
 
@@ -88,7 +92,7 @@ namespace BookStore.Infrastructure.Data
                 .IsFixedLength();
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Order)
+                .HasMany(e => e.Orders)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
         }

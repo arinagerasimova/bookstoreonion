@@ -12,7 +12,7 @@ namespace BookStore.Domain.Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Book()
         {
-            OrderItems = new HashSet<OrderItems>();
+            OrderItems = new HashSet<OrderItem>();
         }
 
         public int Id { get; set; }
@@ -36,6 +36,9 @@ namespace BookStore.Domain.Core
 
         public string BookCharacteristic { get; set; }
 
+        [Column(TypeName = "money")]
+        public decimal Price { get; set; }
+
         public virtual Author Author { get; set; }
 
         public virtual Genre Genre { get; set; }
@@ -45,6 +48,6 @@ namespace BookStore.Domain.Core
         public virtual PublishHouse PublishHouse { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace BookStore.Domain.Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            Order = new HashSet<Order>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -30,6 +30,6 @@ namespace BookStore.Domain.Core
         public string PhoneNumber { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

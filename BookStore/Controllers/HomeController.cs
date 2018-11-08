@@ -1,8 +1,11 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using BookStore.Domain.Core;
 using BookStore.Domain.Interfaces;
 using BookStore.Services.Interfaces;
+using AutoMapper;
+using BookStore.Domain.Core.Model;
 
 namespace BookStore.Controllers
 {
@@ -10,28 +13,22 @@ namespace BookStore.Controllers
     {
         IBookRepository repo;
         IOrder order;
+        IPurchaseRepository part;
 
-        public HomeController(IBookRepository r, IOrder o)
+        public HomeController(IBookRepository r, IOrder o, IPurchaseRepository p)
         {
             repo = r;
             order = o;
+            part = p;
         }
         public ActionResult Index()
         {
-            var books = repo.GetBookList();
-            return View();
+            Mapper.Initialize(cfg => cfg.CreateMap<Book, ShortBookModel>());
+            // сопоставление
+            var users =
+                Mapper.Map<IEnumerable<Book>, List<ShortBookModel>>(repo.GetBookList());
+            return View(users);
         }
-
-        public ActionResult Buy(int id)
-        {
-            Book book = repo.GetBook(id);
-            order.MakeOrder(book);
-            return View();
-        }
-        protected override void Dispose(bool disposing)
-        {
-            repo.Dispose();
-            base.Dispose(disposing);
-        }
+        
     }
 }

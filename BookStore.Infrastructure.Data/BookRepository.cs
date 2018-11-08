@@ -4,6 +4,8 @@ using System.Linq;
 using BookStore.Domain.Core;
 using BookStore.Domain.Interfaces;
 using System.Data.Entity;
+using AutoMapper;
+using BookStore.Domain.Core.Model;
 
 namespace BookStore.Infrastructure.Data
 {
@@ -11,24 +13,26 @@ namespace BookStore.Infrastructure.Data
     {
         private StoreContext db;
 
-        public BookRepository()
+        public BookRepository(StoreContext context)
         {
-            this.db = new StoreContext();
+            this.db = context;
         }
 
         public IEnumerable<Book> GetBookList()
         {
-            return db.Book.ToList();
+           
+            return db.Books.ToList();
         }
 
         public Book GetBook(int id)
         {
-            return db.Book.Find(id);
+            
+            return db.Books.Find(id);
         }
 
         public void Create(Book book)
         {
-            db.Book.Add(book);
+            db.Books.Add(book);
         }
 
         public void Update(Book book)
@@ -38,35 +42,10 @@ namespace BookStore.Infrastructure.Data
 
         public void Delete(int id)
         {
-            Book book = db.Book.Find(id);
+            Book book = db.Books.Find(id);
             if (book != null)
-                db.Book.Remove(book);
+                db.Books.Remove(book);
         }
-
-        public void Save()
-        {
-            db.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        public virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    db.Dispose();
-                }
-            }
-
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        
     }
 }

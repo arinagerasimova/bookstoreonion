@@ -1,4 +1,5 @@
-﻿using Ninject.Modules;
+﻿using System.Web;
+using Ninject.Modules;
 using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Business;
 using BookStore.Infrastructure.Data;
@@ -11,7 +12,8 @@ namespace BookStore.Util
         public override void Load()
         {
             Bind<IBookRepository>().To<BookRepository>();
-            Bind<IOrder>().To<CacheOrder>();
+            Bind<IOrderRepository>().To<OrderRepository>();
+            Bind<IPurchaseRepository>().To<PurchaseRepository>();
         }
     }
 }
