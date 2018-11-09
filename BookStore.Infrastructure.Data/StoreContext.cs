@@ -1,10 +1,12 @@
 ﻿
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace BookStore.Infrastructure.Data
 {
     using System.Data.Entity;
     using BookStore.Domain.Core;
 
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext<IdentityUser>
     {
         public StoreContext()
              : base("name=StoreContext")
