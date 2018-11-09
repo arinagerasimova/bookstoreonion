@@ -2,8 +2,8 @@
 
 using System.Threading.Tasks;
 using System.Web.Http;
+using BookStore.Domain.Core;
 using BookStore.Infrastructure.Data;
-using BookStore.Infrastructure.Data.Model;
 using Microsoft.AspNet.Identity;
 
 namespace BookStore.Controllers
@@ -11,7 +11,7 @@ namespace BookStore.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController :  ApiController
     {
-        private AuthRepository _repo = null;
+        private AuthRepository _repo;
 
         public AccountController()
         {

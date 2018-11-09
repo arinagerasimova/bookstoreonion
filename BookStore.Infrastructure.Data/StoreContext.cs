@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BookStore.Infrastructure.Data
@@ -6,7 +7,7 @@ namespace BookStore.Infrastructure.Data
     using System.Data.Entity;
     using BookStore.Domain.Core;
 
-    public class StoreContext : IdentityDbContext<IdentityUser>
+    public class StoreContext : IdentityDbContext<IdentityUser >
     {
         public StoreContext()
              : base("name=StoreContext")
@@ -24,6 +25,12 @@ namespace BookStore.Infrastructure.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserProfile>()
+                .HasKey(r => new {r.Password,r.UserName })
+                .ToTable("UserProfile");
+
             modelBuilder.Entity<Author>()
                 .Property(e => e.AuthorName)
                 .IsUnicode(false);

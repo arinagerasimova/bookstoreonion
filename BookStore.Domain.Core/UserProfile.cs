@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Infrastructure.Data.Model
+namespace BookStore.Domain.Core
 {
-    public class UserProfile
+    public class UserProfile 
     {
         [Required]
         [Display(Name = "User name")]
