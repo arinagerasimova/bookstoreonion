@@ -6,8 +6,8 @@
   <button type="button" class="list-group-item">Porta ac consectetur ac</button>
   <button type="button" class="list-group-item">Vestibulum at eros</button>
 </div>
-<tr *ngFor="let user of users">
-  <ng-template [ngTemplateOutlet]="loadTemplate(user)" 
-              [ngTemplateOutletContext]="{ $implicit: user}">
-  </ng-template>
-</tr>
+<p>id: {{genre?.id}}</p>
+<li *ngFor="let genre of genre">
+  <p>id: {{genre?.id}}</p>
+  <p>genre: {{genre?.name}}</p>
+</li>

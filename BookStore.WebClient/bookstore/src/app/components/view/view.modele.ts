@@ -5,8 +5,10 @@ import { OrdersetComponent } from './orderset/orderset.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { RegistrationComponent } from './registration/registration.component';
 
+import { HttpClientModule }   from '@angular/common/http';
+
 @NgModule({
-  imports: [ CommonModule],
+  imports: [ CommonModule,HttpClientModule],
   declarations: [RegistrationComponent,BooksetComponent, 
     OrdersetComponent, OrdersetComponent,CatalogComponent],
   exports: [RegistrationComponent,BooksetComponent, 
