@@ -7,7 +7,7 @@ namespace BookStore.Domain.Core
     using System.Data.Entity.Spatial;
 
     [Table("Language")]
-    public partial class Language
+    public partial class Language : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Language()

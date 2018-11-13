@@ -1,35 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using BookStore.Domain.Core;
-using BookStore.Domain.Interfaces;
-using BookStore.Services.Interfaces;
-using AutoMapper;
-using BookStore.Domain.Core.Model;
+﻿
+using System.Web.Http;
+using BookStore.Infrastructure.Business;
+using Microsoft.Owin.Security.Provider;
 
 namespace BookStore.Controllers
 {
-    public class HomeController : Controller
+    [System.Web.Http.AllowAnonymous]
+    [System.Web.Http.Route("api/home")]
+    public class HomeController : ApiController
     {
-        IBookRepository repo;
-        IOrder order;
-        IPurchaseRepository part;
-
-        public HomeController(IBookRepository r, IOrder o, IPurchaseRepository p)
-        {
-            repo = r;
-            order = o;
-            part = p;
-        }
-
-        public ActionResult Index()
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<Book, ShortBookModel>());
-            // сопоставление
-            var users =
-                Mapper.Map<IEnumerable<Book>, List<ShortBookModel>>(repo.GetBookList());
-            return View(users);
-        }
-        
+            //[System.Web.Http.Authorize]
+            [System.Web.Http.HttpGet]
+            public IHttpActionResult Get()
+            {
+                var result = BookServes.GetGanre();
+                return Ok(result);
+            }
     }
 }

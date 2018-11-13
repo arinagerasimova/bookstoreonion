@@ -7,7 +7,7 @@ namespace BookStore.Domain.Core
     using System.Data.Entity.Spatial;
 
     [Table("Order")]
-    public partial class Order
+    public partial class Order : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()

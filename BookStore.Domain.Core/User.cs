@@ -7,7 +7,7 @@ namespace BookStore.Domain.Core
     using System.Data.Entity.Spatial;
 
     [Table("User")]
-    public partial class User
+    public partial class User : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Infrastructure.Business.Services.Interfaces
+namespace BookStore.Services.Interfaces
 {
-    public class IOrderService
+    public interface IBookServes
     {
     }
 }

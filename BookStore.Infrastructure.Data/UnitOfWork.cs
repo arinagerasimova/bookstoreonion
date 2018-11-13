@@ -8,6 +8,7 @@ namespace BookStore.Infrastructure.Data
         private BookRepository _bookRepository;
         private OrderRepository _orderRepository;
         private PurchaseRepository _purchaseRepository;
+        private GenreRepository _genreRepository;
 
         public BookRepository Books
         {
@@ -16,6 +17,16 @@ namespace BookStore.Infrastructure.Data
                 if (_bookRepository == null)
                     _bookRepository = new BookRepository(_db);
                 return _bookRepository;
+            }
+        }
+
+        public GenreRepository Genre
+        {
+            get
+            {
+                if (_genreRepository == null)
+                    _genreRepository = new GenreRepository(_db);
+                return _genreRepository;
             }
         }
 
