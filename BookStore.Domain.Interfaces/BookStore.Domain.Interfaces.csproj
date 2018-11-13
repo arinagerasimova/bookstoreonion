@@ -50,10 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBookRepository.cs" />
-    <Compile Include="IOrderRepository.cs" />
-    <Compile Include="IPurchaseRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

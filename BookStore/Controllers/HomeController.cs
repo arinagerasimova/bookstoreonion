@@ -1,6 +1,8 @@
 ﻿
 using System.Web.Http;
 using BookStore.Infrastructure.Business;
+using BookStore.Infrastructure.Business.Services;
+using BookStore.Services.Interfaces;
 using Microsoft.Owin.Security.Provider;
 
 namespace BookStore.Controllers
@@ -9,12 +11,13 @@ namespace BookStore.Controllers
     [System.Web.Http.Route("api/home")]
     public class HomeController : ApiController
     {
-            //[System.Web.Http.Authorize]
+            ////[System.Web.Http.Authorize]
             [System.Web.Http.HttpGet]
             public IHttpActionResult Get()
             {
-                var result = BookServes.GetGanre();
-                return Ok(result);
+                IBookService b =new BookService();
+                
+                return Ok(b.GetGanre());
             }
     }
 }

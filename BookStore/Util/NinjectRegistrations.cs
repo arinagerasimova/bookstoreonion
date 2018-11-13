@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using BookStore.Domain.Core;
 using Ninject.Modules;
 using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Business;
@@ -12,9 +13,10 @@ namespace BookStore.Util
     {
         public override void Load()
         {
-            Bind<IBookRepository>().To<BookRepository>();
-            Bind<IOrderRepository>().To<OrderRepository>();
-            Bind<IPurchaseRepository>().To<PurchaseRepository>();
+            Bind<IRepository<Book>>().To<Repository<Book>>();
+            Bind<IRepository<Genre>>().To<Repository<Genre>>();
+            Bind<IBookService>().To<BookService>();
+            //Bind<IPurchaseRepository>().To<PurchaseRepository>();
         }
     }
 }

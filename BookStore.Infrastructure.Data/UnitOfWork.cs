@@ -1,78 +1,90 @@
-﻿using System;
+﻿using FluentNHibernate.Automapping;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using NHibernate;
+using NHibernate.Tool.hbm2ddl;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using BookStore.Domain.Core;
+using BookStore.Domain.Core.Model;
+using BookStore.Domain.Interfaces;
+using BookStore.Infrastructure.Business.Model;
+using FluentNHibernate.Data;
+using NHibernate.Cfg;
+using NHibernate.Cfg.MappingSchema;
+using NHibernate.Dialect;
+using NHibernate.Mapping.ByCode;
 
 namespace BookStore.Infrastructure.Data
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork  //IUnitOfWork // IDisposable// IUnitOfWork
     {
-        private readonly StoreContext _db = new StoreContext();
-        private BookRepository _bookRepository;
-        private OrderRepository _orderRepository;
-        private PurchaseRepository _purchaseRepository;
-        private GenreRepository _genreRepository;
+        //private static readonly ISessionFactory _sessionFactory;
+        //private ITransaction _transaction;
 
-        public BookRepository Books
-        {
-            get
-            {
-                if (_bookRepository == null)
-                    _bookRepository = new BookRepository(_db);
-                return _bookRepository;
-            }
-        }
+        //public ISession Session { get; set; }
 
-        public GenreRepository Genre
-        {
-            get
-            {
-                if (_genreRepository == null)
-                    _genreRepository = new GenreRepository(_db);
-                return _genreRepository;
-            }
-        }
+        //static UnitOfWork()
+        //{
+        //    //_sessionFactory = Fluently.Configure()
+        //    //    .Database(MsSqlConfiguration.MsSql2008.ConnectionString(x => x.FromConnectionStringWithKey("StoreContext")))
+        //    //    .Mappings(x => x.AutoMappings.Add(
+        //    //        AutoMap.AssemblyOf<Genre>(new AutomappingConfiguration()).UseOverridesFromAssemblyOf<GenreItem>()))
+        //    //    .ExposeConfiguration(config => new SchemaUpdate(config).Execute(false, true))
+        //    //    .BuildSessionFactory();
+        //    Configuration configuration = new Configuration();
+        //    configuration.configure();
+        //    ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(
+        //        configuration.getProperties()).buildServiceRegistry();
+        //    sessionFactory = configuration.buildSessionFactory(serviceRegistry)
+        //}
 
-        public OrderRepository Orders
-        {
-            get
-            {
-                if (_orderRepository == null)
-                    _orderRepository = new OrderRepository(_db);
-                return _orderRepository;
-            }
-        }
+        //public UnitOfWork()
+        //{
+        //    Session = _sessionFactory.OpenSession();
+        //}
 
-        public PurchaseRepository Purchase
-        {
-            get
-            {
-                if (_purchaseRepository == null)
-                    _purchaseRepository = new PurchaseRepository(_db);
-                return _purchaseRepository;
-            }
-        }
+        //public void BeginTransaction()
+        //{
+        //    _transaction = Session.BeginTransaction();
+        //}
 
-        public void Save()
-        {
-            _db.SaveChanges();
-        }
+        //public void Commit()
+        //{
+        //    try
+        //    {
+        //        if (_transaction != null && _transaction.IsActive)
+        //            _transaction.Commit();
+        //    }
+        //    catch
+        //    {
+        //        if (_transaction != null && _transaction.IsActive)
+        //            _transaction.Rollback();
 
-        private bool disposed = false;
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        Session.Dispose();
+        //    }
+        //}
 
-        public virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _db.Dispose();
-                }
-                this.disposed = true;
-            }
-        }
+        //public void Rollback()
+        //{
+        //    try
+        //    {
+        //        if (_transaction != null && _transaction.IsActive)
+        //            _transaction.Rollback();
+        //    }
+        //    finally
+        //    {
+        //        Session.Dispose();
+        //    }
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+
     }
 }
