@@ -28,9 +28,6 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit() {
     
-    this.httpService.getData().subscribe(data => this.genre=(data as Genre[]),
-      error => {this.error = error.message; console.log(error);} );
-    debugger;
     
   }
 

@@ -16,9 +16,6 @@ export class HttpService {
 
     constructor(private http: Http, private httpcline: HttpClient, private router: Router, private genreService: GenreService) {
     }
-    getData() {
-        return this.httpcline.get("http://localhost:55656/")
-    }
     getGenre() {
         var headers = new Headers({ 'Content-Type': '', 'Authorization': "" + this.genreService.getToken() });
         var url = "http://localhost:55656/";
