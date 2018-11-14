@@ -1,26 +1,28 @@
 import {Injectable} from '@angular/core';
+import { Http, RequestOptions, Response, Headers } from '@angular/http';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Genre} from '../model/genre';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject} from 'rxjs';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
    
 @Injectable()
  export class GenreService{
-//     private baseUrl = "http://localhost:55656/";
-//     constructor(private http: HttpClient){ }
-      
-//     getGenre(){
-//         return this.http.get(this.baseUrl+"api/home");
-//     }
-  
-//     createGenre(genre: Genre){
-//         return this.http.post(this.baseUrl, genre); 
-//     }
-//     updateGenre(id: number, genre: Genre) {
-//         const urlParams = new HttpParams().set("id", id.toString());
-//         return this.http.put(this.baseUrl, genre, { params: urlParams});
-//     }
-//     deleteGenre(id: number){
-//         const urlParams = new HttpParams().set("id", id.toString());
-//         return this.http.delete(this.baseUrl, { params: urlParams});
-//     } 
+    headers: any = new Headers({ 'Content-Type': '', 'Authorization': ' ' + localStorage.getItem("token") });
+    
+    options: any = new RequestOptions({ headers: this.headers });
+    public loggedIn = false;
+    public currentUser;
+    isBusy: boolean = false;
+    public token: string; 
+    private currentUserSubj = new ReplaySubject<any>(1);
+    constructor(private router: Router, private http: Http, private _location: Location) {
+
+    }
+    public getToken() {
+        if (this.token && this.token.length > 0)
+            return this.token;
+        this.token = localStorage.getItem('token');
+        return this.token;
+    }
 }

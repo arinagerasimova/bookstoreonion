@@ -1,4 +1,4 @@
 {
-    "heroesUrl": "",
+    "heroesUrl": "http://localhost:55656",
     "textfile": "assets/textfile.txt"
   }

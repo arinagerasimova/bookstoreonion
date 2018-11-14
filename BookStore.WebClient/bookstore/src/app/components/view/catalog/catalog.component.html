@@ -1,13 +1,5 @@
-<div class="list-group">
-  <h3>Категории книг</h3>
-  <button type="button" class="list-group-item">Cras justo odio</button>
-  <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
-  <button type="button" class="list-group-item">Morbi leo risus</button>
-  <button type="button" class="list-group-item">Porta ac consectetur ac</button>
-  <button type="button" class="list-group-item">Vestibulum at eros</button>
+<h3>Категории книг</h3>
+  <div class="list-group" *ngFor="let genre of genre">
+    <button type="button" class="list-group-item">{{genre?.genreName}}</button>
 </div>
-<p>id: {{genre?.id}}</p>
-<li *ngFor="let genre of genre">
-  <p>id: {{genre?.id}}</p>
-  <p>genre: {{genre?.name}}</p>
-</li>
+
