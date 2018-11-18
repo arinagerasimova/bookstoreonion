@@ -12,9 +12,10 @@ namespace BookStore.Controllers
     {
         private IBookService b;
 
-        public HomeController()
+        public HomeController(IBookService bookService)
         {
-            b = new BookService();
+            b = bookService;
+            //b = new BookService();
         }
 
         //[System.Web.Http.Authorize]

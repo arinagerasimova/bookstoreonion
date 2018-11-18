@@ -18,10 +18,10 @@ namespace BookStore.Infrastructure.Business.Services
         private IRepository<Genre> _repGenre;
         private IRepository<Book> _repBook;
 
-        public BookService()
+        public BookService(IRepository<Genre> repGenre, IRepository<Book> repBook)
         {
-            _repGenre = new Repository<Genre>();
-            _repBook = new Repository<Book>();
+            _repGenre = repGenre;//new Repository<Genre>(); 
+            _repBook = repBook;// new Repository<Book>();
         }
 
         public List<GenreItem> GetGanre()

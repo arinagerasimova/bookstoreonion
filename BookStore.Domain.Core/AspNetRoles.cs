@@ -6,24 +6,21 @@ namespace BookStore.Domain.Core
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("PublishHouse")]
-    public partial class PublishHouse
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PublishHouse()
+        public AspNetRoles()
         {
-            Book = new HashSet<Book>();
+            AspNetUsers = new HashSet<AspNetUsers>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string PublishHouseName { get; set; }
-
-        public string PublishHouseCharacteristic { get; set; }
+        [StringLength(256)]
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Book> Book { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

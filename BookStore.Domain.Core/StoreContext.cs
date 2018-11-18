@@ -1,19 +1,16 @@
-﻿
-using System.Collections.Generic;
-using Microsoft.AspNet.Identity.EntityFramework;
-
-namespace BookStore.Infrastructure.Data
+namespace BookStore.Domain.Core
 {
+    using System;
     using System.Data.Entity;
-    using BookStore.Domain.Core;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
-    public class StoreContext : IdentityDbContext<IdentityUser >
+    public partial class StoreContext : DbContext
     {
         public StoreContext()
-             : base("name=StoreContext")
+            : base("name=StoreContext")
         {
         }
-
 
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }

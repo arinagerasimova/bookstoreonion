@@ -1,8 +1,8 @@
 <div class='row'>
-  <div class='col-2'>
+  <div class='col-lg-2 col-md-2 col-sm-3 col-xs-3'>
     <app-catalog></app-catalog>
   </div>
-  <div class='col-10'>
+  <div class='col'>
     <h3>///</h3>
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-2 mb-2" *ngFor="let book of book">
@@ -15,7 +15,7 @@
           </div>
           <p-footer>
             <h4>{{book.price}} грн</h4>
-            <button pButton type="button" label="Купить"></button>
+            <button pButton type="button" label="Купить" (click)="order(id)" ></button>
           </p-footer>
         </p-card>
       </div>

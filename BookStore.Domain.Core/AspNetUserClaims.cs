@@ -6,17 +6,18 @@ namespace BookStore.Domain.Core
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class OrderItem
+    public partial class AspNetUserClaims
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int BookId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
 
-        public int OrderId { get; set; }
+        public string ClaimType { get; set; }
 
-        public virtual Book Book { get; set; }
+        public string ClaimValue { get; set; }
 
-        public virtual Order Order { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

@@ -18,5 +18,8 @@ export class BooksetComponent implements OnInit {
   }
   ngOnInit() {
   }
-
+  order(id:number )
+  {
+    
+  }
 }

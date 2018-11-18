@@ -7,12 +7,12 @@ namespace BookStore.Domain.Core
     using System.Data.Entity.Spatial;
 
     [Table("Author")]
-    public partial class Author : IEntity
+    public partial class Author
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Author()
         {
-            Books = new HashSet<Book>();
+            Book = new HashSet<Book>();
         }
 
         public int Id { get; set; }
@@ -24,6 +24,6 @@ namespace BookStore.Domain.Core
         public string AuthorCharacteristic { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<Book> Book { get; set; }
     }
 }

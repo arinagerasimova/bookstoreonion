@@ -3,6 +3,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using BookStore.Domain.Core;
+using BookStore.Domain.Interfaces;
 using BookStore.Infrastructure.Data;
 using Microsoft.AspNet.Identity;
 
@@ -12,10 +13,12 @@ namespace BookStore.Controllers
     public class AccountController :  ApiController
     {
         private AuthRepository _repo;
+        private IRepository<User> _userrepo;
 
-        public AccountController()
+        public AccountController(/*IRepository<User> r*/)
         {
             _repo = new AuthRepository();
+            _userrepo = new Repository<User>();
         }
 
         // POST api/Account/Register
@@ -36,7 +39,11 @@ namespace BookStore.Controllers
             {
                 return errorResult;
             }
-
+            else {
+                //var IdUser = _repo.FindUser(userModel.UserName, userModel.Password).Id;
+                //var user = new User() { UserId = IdUser };
+                //_userrepo.Create(user)
+            }
             return Ok();
         }
 

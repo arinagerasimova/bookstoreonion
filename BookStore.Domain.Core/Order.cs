@@ -7,12 +7,12 @@ namespace BookStore.Domain.Core
     using System.Data.Entity.Spatial;
 
     [Table("Order")]
-    public partial class Order : IEntity
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            OrderItems = new HashSet<OrderItem>();
+            OrderItems = new HashSet<OrderItems>();
         }
 
         public int Id { get; set; }
@@ -25,6 +25,6 @@ namespace BookStore.Domain.Core
         public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderItems> OrderItems { get; set; }
     }
 }
