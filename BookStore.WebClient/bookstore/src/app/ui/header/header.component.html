@@ -6,9 +6,10 @@
         
         <div class="col-md-1 offset-md-3">
             <a style="cursor: pointer;">
-                <i class="fa fa-shopping-basket"></i>
-                *User!!!
+                <i [routerLink]="['/order']"  class="fa fa-shopping-basket"></i>
             </a>
+            <label>{{userName}}</label>
+            <button (click)="clicking()" class="btn btn-outline-light text-dark">{{buttonName}}</button>
         </div>
     </div>
     <div class="row">

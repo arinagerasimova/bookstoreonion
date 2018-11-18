@@ -8,21 +8,15 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.css'],
   providers: [HttpService]
 })
 export class CatalogComponent implements OnInit {
   
   genre:Genre[]=[];
-  sub: any;
-    id: any;
-    data: any;
-  error:any;
   constructor(private httpService: HttpService,
     private route: ActivatedRoute) {
         this.httpService.getGenre().subscribe(res => {
-          debugger;
-            this.data = res;
+            this.genre = res;
         });
   }
 

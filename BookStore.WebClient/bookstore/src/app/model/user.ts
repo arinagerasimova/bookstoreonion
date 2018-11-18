@@ -1,5 +1,6 @@
 export class User {
-    username: string;
-    password: string;
-    confirmpassword: string;
+    UserName: string;
+    Password: string;
+    ConfirmPassword: string;
+    grant_type: 'password'
 }

@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 import { BooksetComponent } from './bookset/bookset.component';
 import { OrdersetComponent } from './orderset/orderset.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { RegistrationComponent } from './registration/registration.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }   from '@angular/common/http';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import {CardModule} from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
-  imports: [ CommonModule,HttpClientModule],
-  declarations: [RegistrationComponent,BooksetComponent, 
+  imports: [ CommonModule,CardModule,HttpClientModule,FormsModule,BrowserModule,
+    HttpClientModule,ReactiveFormsModule,AppRoutingModule, ButtonModule],
+  declarations: [BooksetComponent, 
     OrdersetComponent, OrdersetComponent,CatalogComponent],
-  exports: [RegistrationComponent,BooksetComponent, 
+  exports: [BooksetComponent, 
     OrdersetComponent, OrdersetComponent,CatalogComponent]
 })
 

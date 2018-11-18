@@ -18,9 +18,14 @@ export class HttpService {
     }
     getGenre() {
         var headers = new Headers({ 'Content-Type': '', 'Authorization': "" + this.genreService.getToken() });
-        var url = "http://localhost:55656/";
+        var url = "api/genre";
         return this.http.get(url).pipe(map(response =>
             response.json()));
     }
-
+    getBook() {
+        var headers = new Headers({ 'Content-Type': '', 'Authorization': "" + this.genreService.getToken() });
+        var url = "api/bookset";
+        return this.http.get(url).pipe(map(response =>
+            response.json()));
+    }
 }

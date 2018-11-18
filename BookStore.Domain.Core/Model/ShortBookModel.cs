@@ -16,7 +16,7 @@ namespace BookStore.Domain.Core.Model
         [StringLength(50)]
         public string Title { get; set; }
 
-        public int AuthorId { get; set; }
+        public string Author { get; set; }
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
 

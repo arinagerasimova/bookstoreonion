@@ -10,16 +10,29 @@ namespace BookStore.Controllers
     [System.Web.Http.AllowAnonymous]
     public class HomeController : ApiController
     {
+        private IBookService b;
+
+        public HomeController()
+        {
+            b = new BookService();
+        }
 
         //[System.Web.Http.Authorize]
-        [Route("")]
-        [System.Web.Http.HttpGet]
 
-            public IHttpActionResult Get()
-            {
-                IBookService b =new BookService();
-                
-                return Ok(b.GetGanre());
-            }
+        [Route("api/genre")]
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetGanre()
+        {
+
+            return Ok(b.GetGanre());
+        }
+
+        [Route("api/bookset")]
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetBookSet()
+        {
+
+            return Ok(b.GetBooks());
+        }
     }
 }

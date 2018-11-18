@@ -13,25 +13,38 @@ using BookStore.Infrastructure.Data;
 
 namespace BookStore.Infrastructure.Business.Services
 {
-    public class BookService:IBookService
+    public class BookService : IBookService
     {
-        private IRepository<Genre> _repository;
+        private IRepository<Genre> _repGenre;
+        private IRepository<Book> _repBook;
 
         public BookService()
         {
-            _repository = new Repository<Genre>();
+            _repGenre = new Repository<Genre>();
+            _repBook = new Repository<Book>();
         }
 
         public List<GenreItem> GetGanre()
         {
-            var genres = _repository.Get().Select(x => new GenreItem
+            var genres = _repGenre.Get().Select(x => new GenreItem
             {
                 Id = x.Id,
                 GenreName = x.Genre1
             }).ToList();
             return genres;
         }
+        public List<ShortBookModel> GetBooks()
+        {
+            var books = _repBook.Get().Select(x => new ShortBookModel
+            {
+                Id = x.Id,
+                Title=x.Title,
+                Author=x.Author.AuthorName,
+                Price=x.Price
 
+            }).ToList();
+            return books;
+        }
 
-    }
+}
 }

@@ -1,30 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../model/user';
+import { Observable,ReplaySubject,of, from } from 'rxjs';
+import {  RequestOptions,  Headers, Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: HttpClient) { }
+    public Name: string='';
+    constructor(private http: HttpClient) {
+        
+     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
-            .pipe(map(user => {
+    login(username: string, password: string,grant_type:string) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/x-www-form-urlencoded'
+            })
+          };
+        return this.http.post<any>(`api/token`,
+        `grant_type=${grant_type}&username=${username}&password=${password}`, httpOptions)
+            .pipe(map(result => {
                 // login successful if there's a jwt token in the response
-                if (user && user.token) {
+                if (result && result.access_token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('token', JSON.stringify(result.access_token));
+                    this.Name=username;
                 }
-
-                return user;
+                return result;
             }));
+            this.Name=username;
+            
     }
-
     logout() {
+        this.Name='';
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
     }
     register(user: User) {
-        return this.http.post(`/users/register`, user);
+        return this.http.post(`api/account/register`, user);
     }
+    getUserName()
+    {
+        return this.Name;
+    }
+
 }
