@@ -1,45 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BookStore.Services.Interfaces;
+using System.Threading.Tasks;
 using System.Web.Http;
+using BookStore.Domain.Core.Model;
 
 namespace BookStore.Controllers
 {
-    [RoutePrefix("api/Orders")]
+    //[RoutePrefix("api/Orders")]
+
     public class OrdersController : ApiController
     {
+
+        private IOrderService order;
+
+        public OrdersController(IOrderService orderService)
+        {
+            var name = User.Identity.Name;
+            order = orderService;
+        }
+
         [Authorize]
-        [HttpGet]
-        public IHttpActionResult Get()
+        [Route("api/orders/create")]
+        public async Task<IHttpActionResult> CreateOrder(OrderBook book)
         {
-            return Ok(Order.CreateOrders());
-        }
-
-    }
-
-    #region Helpers
-
-    public class Order
-    {
-        public int OrderID { get; set; }
-        public string CustomerName { get; set; }
-        public string ShipperCity { get; set; }
-        public Boolean IsShipped { get; set; }
-
-        public static List<Order> CreateOrders()
-        {
-            List<Order> OrderList = new List<Order>
-            {
-                new Order {OrderID = 10248, CustomerName = "Taiseer Joudeh", ShipperCity = "Amman", IsShipped = true },
-                new Order {OrderID = 10249, CustomerName = "Ahmad Hasan", ShipperCity = "Dubai", IsShipped = false},
-                new Order {OrderID = 10250,CustomerName = "Tamer Yaser", ShipperCity = "Jeddah", IsShipped = false },
-                new Order {OrderID = 10251,CustomerName = "Lina Majed", ShipperCity = "Abu Dhabi", IsShipped = false},
-                new Order {OrderID = 10252,CustomerName = "Yasmeen Rami", ShipperCity = "Kuwait", IsShipped = true}
-            };
-
-            return OrderList;
+            var name = User.Identity.Name;
+            order.BookOrder(book.IdBook, name);
+            return Ok();
         }
     }
-    #endregion
+
+
 }
+
+

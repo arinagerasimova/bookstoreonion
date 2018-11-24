@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { tokenName } from '@angular/compiler';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
+import { HttpService } from 'src/app/service/http.service';
 
 @Component({
   selector: 'app-header',
@@ -9,23 +11,32 @@ import { Router } from '@angular/router';
   // styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-userName: string=this.authenticationService.Name;
+userName: string='';
 buttonName: string='';
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
-    if (localStorage.getItem('token')!=null)
+  constructor(private router: Router, private authenticationService: AuthenticationService,
+    private userservice:UserService,private httpService: HttpService) {
+  }
+
+   ngOnInit()
+   {
+     debugger;
+    if (this.httpService.isAuthenticated())
     {
+      
       this.buttonName='выйти';
+      this.userservice.getUserName().subscribe(res => {
+        this.userName = res;
+    });
+    
     }
     else   this.buttonName='войти';
    }
-
-  ngOnInit() {
-  }
   clicking()
   {
-    if (localStorage.getItem('token')!=null)
+    if (this.httpService.isAuthenticated())
       {
         this.authenticationService.logout();
+        this.userName='';
       }
       else this.router.navigate(['/login']);
   }

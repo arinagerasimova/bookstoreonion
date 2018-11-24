@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-    public Name: string='';
     constructor(private http: HttpClient) {
-        
      }
 
     login(username: string, password: string,grant_type:string) {
@@ -25,25 +23,20 @@ export class AuthenticationService {
                 // login successful if there's a jwt token in the response
                 if (result && result.access_token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('token', JSON.stringify(result.access_token));
-                    this.Name=username;
+                    localStorage.setItem('token', result.access_token);
                 }
                 return result;
             }));
-            this.Name=username;
             
     }
     logout() {
-        this.Name='';
+        localStorage.removeItem('username');
         // remove user from local storage to log user out
         localStorage.removeItem('token');
     }
     register(user: User) {
+        debugger;
         return this.http.post(`api/account/register`, user);
-    }
-    getUserName()
-    {
-        return this.Name;
     }
 
 }

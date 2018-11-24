@@ -11,6 +11,7 @@ using Ninject;
 using BookStore.Util;
 using System.Web.Mvc;
 using Ninject.Web.Mvc;
+using WebApiContrib.IoC.Ninject;
 
 
 [assembly: OwinStartup(typeof(BookStore.Startup))]
@@ -18,19 +19,16 @@ namespace BookStore
 {
     public class Startup
     {
+
         public void Configuration(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
-
+            config.DependencyResolver = new NinjectResolver(NinjectConfig.CreateKernel());
             ConfigureOAuth(app);
 
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-
-            NinjectModule registrations = new NinjectRegistrations();
-            var kernel = new StandardKernel(registrations);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
 
         public void ConfigureOAuth(IAppBuilder app)

@@ -1,0 +1,10 @@
+diff a/BookStore/Controllers/AccountController.cs b/BookStore/Controllers/AccountController.cs	(rejected hunks)
+@@ -11,7 +11,7 @@
+     [RoutePrefix("api/Account")]
+     public class AccountController :  ApiController
+     {
+-        private AuthRepository _repo = null;
++        private AuthRepository _repo;
+ 
+         public AccountController()
+         {

@@ -15,10 +15,7 @@ namespace BookStore.Controllers
         public HomeController(IBookService bookService)
         {
             b = bookService;
-            //b = new BookService();
         }
-
-        //[System.Web.Http.Authorize]
 
         [Route("api/genre")]
         [System.Web.Http.HttpGet]

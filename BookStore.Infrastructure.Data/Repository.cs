@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -22,6 +23,7 @@ namespace BookStore.Infrastructure.Data
             _context = context;
             _dbSet = context.Set<T>();
         }
+
         public Repository()
         {
             _context = new StoreContext();
@@ -44,7 +46,9 @@ namespace BookStore.Infrastructure.Data
         public void Create(T item)
         {
             _dbSet.Add(item);
-            _context.SaveChanges();
+                _context.SaveChanges();
+            
+
         }
         public void Update(T item)
         {

@@ -15,10 +15,17 @@ namespace BookStore.Controllers
         private AuthRepository _repo;
         private IRepository<User> _userrepo;
 
-        public AccountController(/*IRepository<User> r*/)
+        public AccountController(IRepository<User> r)
         {
             _repo = new AuthRepository();
-            _userrepo = new Repository<User>();
+            _userrepo = r;
+        }
+        [System.Web.Mvc.Authorize]
+        [System.Web.Mvc.Route("username")]
+        [HttpGet]
+        public IHttpActionResult GetUserName()
+        {
+            return Ok(User.Identity.Name);
         }
 
         // POST api/Account/Register
@@ -39,11 +46,7 @@ namespace BookStore.Controllers
             {
                 return errorResult;
             }
-            else {
-                //var IdUser = _repo.FindUser(userModel.UserName, userModel.Password).Id;
-                //var user = new User() { UserId = IdUser };
-                //_userrepo.Create(user)
-            }
+           
             return Ok();
         }
 

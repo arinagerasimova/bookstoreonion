@@ -8,15 +8,8 @@ namespace BookStore.Domain.Core
 
     public partial class OrderItems
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
-
         public int BookId { get; set; }
 
         public int OrderId { get; set; }
-
-        public virtual Book Book { get; set; }
-
-        public virtual Order Order { get; set; }
     }
 }

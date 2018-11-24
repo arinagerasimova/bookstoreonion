@@ -12,7 +12,7 @@ namespace BookStore.Domain.Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Language()
         {
-            Book = new HashSet<Book>();
+            Books = new HashSet<Book>();
         }
 
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace BookStore.Domain.Core
         public string Language1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Book> Book { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

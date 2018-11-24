@@ -1,31 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, from } from 'rxjs';
-import { GenreService } from './genre.service'
-import { Http, Response, RequestOptions, Headers, ResponseContentType } from '@angular/http';
-import { Router } from '@angular/router';
+import { Http, RequestOptions, Response, Headers } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Genre } from '../model/genre';
+import { Observable, ReplaySubject } from 'rxjs';
 import { Location } from '@angular/common';
-import { catchError, map, tap } from 'rxjs/operators';
-
-declare var $: any;
-declare var swal: any;
-
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
+    headers: any = new Headers({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.getToken()}` });
 
-    constructor(private http: Http, private httpcline: HttpClient, private router: Router, private genreService: GenreService) {
+    options: any = new RequestOptions({ headers: this.headers });
+    public loggedIn = false;
+    public currentUser;
+    isBusy: boolean = false;
+    public token: string;
+    private currentUserSubj = new ReplaySubject<any>(1);
+    constructor(private router: Router, private http: Http, private _location: Location) {
+
     }
-    getGenre() {
-        var headers = new Headers({ 'Content-Type': '', 'Authorization': "" + this.genreService.getToken() });
-        var url = "api/genre";
-        return this.http.get(url).pipe(map(response =>
-            response.json()));
+    public getToken() {
+        if (this.token && this.token.length > 0)
+            return this.token;
+        this.token = localStorage.getItem('token');
+        return this.token;
     }
-    getBook() {
-        var headers = new Headers({ 'Content-Type': '', 'Authorization': "" + this.genreService.getToken() });
-        var url = "api/bookset";
-        return this.http.get(url).pipe(map(response =>
-            response.json()));
+
+    public isAuthenticated() {
+        if (this.getToken() == null)
+            return false;
+        return true;
     }
+
+    public post(url: string, body: any = {}) {
+        const httpOptions = { headers: this.headers }
+        return this.http.post("api/orders/create", body, httpOptions);
+    }
+
 }

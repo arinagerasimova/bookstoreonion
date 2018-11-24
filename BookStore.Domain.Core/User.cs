@@ -12,26 +12,25 @@ namespace BookStore.Domain.Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            Order = new HashSet<Order>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string UserName { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string Adress { get; set; }
 
         [StringLength(10)]
         public string PhoneNumber { get; set; }
 
-        [StringLength(128)]
-        public string UserId { get; set; }
-
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        [Required]
+        [StringLength(256)]
+        public string Login { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

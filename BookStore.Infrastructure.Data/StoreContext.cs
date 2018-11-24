@@ -1,53 +1,39 @@
 ﻿
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
+using BookStore.Domain.Core;
 
 namespace BookStore.Infrastructure.Data
 {
-    using System.Data.Entity;
-    using BookStore.Domain.Core;
 
-    public class StoreContext : IdentityDbContext<IdentityUser >
+
+    public partial class StoreContext : IdentityDbContext<IdentityUser>
     {
+
         public StoreContext()
-             : base("name=StoreContext")
+            : base("name=StoreContext")
         {
         }
-
-
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Author> Author { get; set; }
-        public virtual DbSet<Book> Book { get; set; }
-        public virtual DbSet<Genre> Genre { get; set; }
-        public virtual DbSet<Language> Language { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
-        public virtual DbSet<OrderItems> OrderItems { get; set; }
-        public virtual DbSet<PublishHouse> PublishHouse { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Author> Authors { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<PublishHouse> PublishHouses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AspNetRoles>()
-                .HasMany(e => e.AspNetUsers)
-                .WithMany(e => e.AspNetRoles)
-                .Map(m => m.ToTable("AspNetUserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
+            Database.SetInitializer<StoreContext>(null);
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<AspNetUsers>()
-                .HasMany(e => e.AspNetUserClaims)
-                .WithRequired(e => e.AspNetUsers)
-                .HasForeignKey(e => e.UserId);
-
-            modelBuilder.Entity<AspNetUsers>()
-                .HasMany(e => e.AspNetUserLogins)
-                .WithRequired(e => e.AspNetUsers)
-                .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<Author>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.Author)
                 .WillCascadeOnDelete(false);
 
@@ -61,12 +47,12 @@ namespace BookStore.Infrastructure.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Genre>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.Genre)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Language>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.Language)
                 .WillCascadeOnDelete(false);
 
@@ -76,7 +62,7 @@ namespace BookStore.Infrastructure.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PublishHouse>()
-                .HasMany(e => e.Book)
+                .HasMany(e => e.Books)
                 .WithRequired(e => e.PublishHouse)
                 .WillCascadeOnDelete(false);
 
@@ -85,7 +71,7 @@ namespace BookStore.Infrastructure.Data
                 .IsFixedLength();
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Order)
+                .HasMany(e => e.Orders)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
         }

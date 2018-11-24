@@ -79,10 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspNetRoles.cs" />
-    <Compile Include="AspNetUserClaims.cs" />
-    <Compile Include="AspNetUserLogins.cs" />
-    <Compile Include="AspNetUsers.cs" />
+    <Compile Include="AspNetUser.cs" />
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="C__MigrationHistory.cs" />
@@ -90,12 +87,13 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Model\GenreItem.cs" />
+    <Compile Include="Model\OrderBook.cs" />
     <Compile Include="Model\ShortBookModel.cs" />
     <Compile Include="Order.cs" />
-    <Compile Include="OrderItems.cs" />
+    <Compile Include="OrderItem.cs" />
+    <Compile Include="Model\OrderItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishHouse.cs" />
-    <Compile Include="StoreContext.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserProfile.cs" />
   </ItemGroup>
