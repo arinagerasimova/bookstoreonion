@@ -10,7 +10,7 @@ namespace BookStore.Services.Interfaces
     public interface IOrderService
     {
         void BookOrder(int idBook, string userName);
-
+         int NumberOfBook(string userName);
         void Buy(string userName);
     }
 }

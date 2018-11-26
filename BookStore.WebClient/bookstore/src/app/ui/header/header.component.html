@@ -1,23 +1,26 @@
 <form class="navbar-form p-3 mb-2 bg-light text-dark" role="search">
     <div class="row ">
-        <div class="col-md-3 offset-md-5 " text='center' >
-          <h2>Книжный магазин</h2>
+        <div class="col-md-3 offset-md-5 " text='center'>
+            <h2>Книжный магазин</h2>
         </div>
-        
-        <div  class=" col-md-3  offset-md-1 ">
+
+        <div class=" col-md-3  offset-md-1 ">
+            <label>{{userName}}          </label>
             <a style="cursor: pointer;">
-                <i [routerLink]="['/order']"  class="fa fa-shopping-basket"></i>
+                <i [routerLink]="['/order']" class="fa fa-shopping-basket"></i>
             </a>
-            <label>{{userName}}</label>
+            <label>({{count}})  </label>
+
             <button (click)="clicking()" class="btn btn-outline-light text-dark">{{buttonName}}</button>
+            
         </div>
     </div>
     <div class="row">
         <div class="input-group col-md-5 offset-md-4">
             <input type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
+                <button class="btn btn-default" type="button">Go!</button>
             </span>
-          </div>
+        </div>
     </div>
-  </form>
+</form>

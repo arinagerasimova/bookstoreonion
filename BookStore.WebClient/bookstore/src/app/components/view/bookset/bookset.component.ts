@@ -24,15 +24,17 @@ export class BooksetComponent implements OnInit {
     order(id: number) {
         debugger;
         if (this.httpService.isAuthenticated()) {
-
+debugger;
             this.orderService.order(id)
                 .pipe(first())
                 .subscribe(
                     data => {
+                        alert("Книга добавлена в корзину. Спасибо!");
                         this.router.navigate(['']);
                     },
 
                     error => {
+                        alert("Произошла ошибка! Попробуйте еще раз!");
                     });
         }
         else this.router.navigate(['login']);

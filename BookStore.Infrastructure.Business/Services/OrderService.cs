@@ -6,7 +6,7 @@ using BookStore.Services.Interfaces;
 
 namespace BookStore.Infrastructure.Business.Services
 {
-    public class OrderService: IOrderService
+    public class OrderService : IOrderService
     {
         private IRepository<User> _userRep;
         private IRepository<Order> _orderRep;
@@ -18,16 +18,29 @@ namespace BookStore.Infrastructure.Business.Services
             _orderRep = orderRep;
             _orderitemRep = orderitemRep;
         }
-
+        public int NumberOfBook(string userName)
+        {
+            if (userName != "")
+            {
+                var user = _userRep.Get(c => (c.Login == userName)).FirstOrDefault();
+                int userId = user.Id;
+                var order = _orderRep.Get(c => c.UserId == userId && c.PaymentDate == null).FirstOrDefault();
+                if (order == null)
+                {
+                    return 0;
+                }
+                int orderId = order.Id;
+                int countOrderItem = _orderitemRep.Get(c => c.OrderId == orderId).ToList().Count();
+                return countOrderItem;
+            }
+            return 0;
+        }
         public void BookOrder(int idBook, string userName)
         {
             var user = _userRep.Get(c => (c.Login == userName)).FirstOrDefault();
-            if (user!=null)
-            {
-                //todo log 4 net 
-            }
+
             int userId = user.Id;
-            var order = _orderRep.Get(c => c.UserId == userId && c.PaymentDate == null).FirstOrDefault(); 
+            var order = _orderRep.Get(c => c.UserId == userId && c.PaymentDate == null).FirstOrDefault();
             if (order == null)
             {
                 order = new Order() { UserId = userId };

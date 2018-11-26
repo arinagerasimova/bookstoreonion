@@ -5,7 +5,7 @@ using BookStore.Domain.Core.Model;
 
 namespace BookStore.Controllers
 {
-    //[RoutePrefix("api/Orders")]
+    [RoutePrefix("api/Orders")]
 
     public class OrdersController : ApiController
     {
@@ -19,13 +19,24 @@ namespace BookStore.Controllers
         }
 
         [Authorize]
-        [Route("api/orders/create")]
+        [Route("create")]
         public async Task<IHttpActionResult> CreateOrder(OrderBook book)
         {
             var name = User.Identity.Name;
             order.BookOrder(book.IdBook, name);
             return Ok();
         }
+        [Route("count")]
+        [AllowAnonymous]
+        public string GetNumberOfBook()
+        {
+            var name = User.Identity.Name;
+            var count=order.NumberOfBook(name);
+            if (count == 0)
+                return "";
+            return count.ToString();
+        }
+
     }
 
 

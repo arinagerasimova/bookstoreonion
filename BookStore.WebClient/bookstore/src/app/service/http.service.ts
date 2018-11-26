@@ -34,7 +34,12 @@ export class HttpService {
 
     public post(url: string, body: any = {}) {
         const httpOptions = { headers: this.headers }
-        return this.http.post("api/orders/create", body, httpOptions);
+        return this.http.post(url, body, httpOptions);
+    }
+
+    public get(url: string) {
+        const httpOptions = { headers: this.headers }
+        return this.http.get(url,  httpOptions);
     }
 
 }
