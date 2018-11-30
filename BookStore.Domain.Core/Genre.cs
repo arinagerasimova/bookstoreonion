@@ -16,7 +16,7 @@ namespace BookStore.Domain.Core
         }
 
         public int Id { get; set; }
-
+        
         [Column("Genre")]
         [Required]
         [StringLength(20)]

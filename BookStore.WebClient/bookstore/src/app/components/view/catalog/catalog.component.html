@@ -1,5 +1,5 @@
 <h4 style="text-align: center">Категории книг</h4>
   <div class="list-group" *ngFor="let genre of genre">
-    <button type="button" class="list-group-item">{{genre?.genreName}}</button>
+    <button type="button" class="list-group-item" (click)='changeGenre(genre?.genreName)'>{{genre?.genreName}}</button>
   </div>
 

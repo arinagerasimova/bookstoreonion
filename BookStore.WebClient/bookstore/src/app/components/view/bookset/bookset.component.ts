@@ -11,14 +11,14 @@ import { HttpService } from 'src/app/service/http.service';
 })
 export class BooksetComponent implements OnInit {
     book: Book[] = [];
+    genreName:string='';
     constructor(private bookService: BookService,
         private route: ActivatedRoute, private router: Router, private orderService: OrderService, private httpService: HttpService) {
-        this.bookService.getBook().subscribe(res => {
-            this.book = res;
-        });
+            this.getBookset();
     }
 
     ngOnInit() {
+        
     }
 
     order(id: number) {
@@ -38,7 +38,12 @@ debugger;
                     });
         }
         else this.router.navigate(['login']);
-
-
     }
+    getBookset()
+  {
+    this.bookService.getBook(this.genreName).subscribe(res => {
+      debugger;
+      this.book = res;
+  });
+  }
 }

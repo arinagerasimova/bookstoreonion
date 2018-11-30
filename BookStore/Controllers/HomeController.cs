@@ -27,10 +27,10 @@ namespace BookStore.Controllers
 
         [Route("api/bookset")]
         [System.Web.Http.HttpGet]
-        public IHttpActionResult GetBookSet()
+        public IHttpActionResult GetBookSet(string genre)
         {
 
-            return Ok(b.GetBooks());
+            return Ok(b.GetBooks(genre));
         }
     }
 }

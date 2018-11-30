@@ -4,19 +4,19 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { OrdersetComponent } from './components/view/orderset/orderset.component';
 import { BooksetComponent } from './components/view/bookset/bookset.component';
-import { AuthGuard } from './_guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
-const routes: Routes = [{
-   path: 'registration', component: RegistrationComponent},
-{ path: 'order', component: OrdersetComponent},
+const routes: Routes = [
+{ path: 'registration', component: RegistrationComponent},
+{ path: 'order', component: OrdersetComponent},//, canActivate: [AuthGuard] },
 { path: '', component: BooksetComponent},
 { path: 'login', component: LoginComponent}
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }
 
-
+export const routing = RouterModule.forRoot(routes);

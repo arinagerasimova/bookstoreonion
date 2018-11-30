@@ -1,8 +1,25 @@
 <div class='row'>
-    <div class='col-2'>
-        <app-catalog></app-catalog>
+    <div class='col-lg-2 col-md-2 col-sm-3 col-xs-3'>
+      <app-catalog></app-catalog>
     </div>
-    <div class='col-10'>
-        order
+    <div class='col'>
+      <h3>Ваш заказ</h3>
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-2 mb-2" *ngFor="let book of book; let i = index">
+          <p-card subheader="Subheader" styleClass="ui-card-shadow">
+            <p-header>
+              {{book.title}}
+            </p-header>
+            <div>
+              {{book.author}}
+            </div>
+            <p-footer>
+              <h4>{{book.price}} грн</h4>
+              
+            </p-footer>
+          </p-card>
+        </div>
+      </div>
+      <button pButton type="button" label="Оформить заказ" (click)='AddUserInfo()' ></button>
     </div>
-</div>
+  </div>

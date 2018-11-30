@@ -33,18 +33,34 @@ namespace BookStore.Infrastructure.Business.Services
             }).ToList();
             return genres;
         }
-        public List<ShortBookModel> GetBooks()
+        public List<ShortBookModel> GetBooks(string genreName)
         {
-            var books = _repBook.Get().Select(x => new ShortBookModel
+            List<ShortBookModel> books;
+            if (genreName == null)
+            {
+                books = _repBook.Get().Select(x => new ShortBookModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Author = x.Author.AuthorName,
+                    Price = x.Price
+
+                }).ToList();
+                return books;
+            }
+             books = _repBook.Get(c=>c.Genre.Genre1==genreName).Select(x => new ShortBookModel
             {
                 Id = x.Id,
-                Title=x.Title,
-                Author=x.Author.AuthorName,
-                Price=x.Price
+                Title = x.Title,
+                Author = x.Author.AuthorName,
+                Price = x.Price
 
             }).ToList();
             return books;
+
+
+
         }
 
-}
+    }
 }

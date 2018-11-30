@@ -18,4 +18,9 @@ export class OrderService {
         return this.httpService.get(this.url+"count").pipe(map(response =>
             response.json()));
     }
+    getBook(){
+        return this.httpService.get(this.url+"items").pipe(map(response =>
+            response.json()));
+    }
+
 }

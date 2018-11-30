@@ -11,6 +11,6 @@ namespace BookStore.Services.Interfaces
     public interface IBookService
     {
         List<GenreItem> GetGanre();
-        List<ShortBookModel> GetBooks();
+        List<ShortBookModel> GetBooks(string genreName);
     }
 }

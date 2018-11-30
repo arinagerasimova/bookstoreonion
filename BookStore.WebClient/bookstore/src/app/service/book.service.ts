@@ -14,8 +14,9 @@ export class BookService {
 
     constructor(private http: Http, private httpcline: HttpClient, private router: Router, private htmlService: HttpService) {
     }
-    getBook() {
-         var url = "api/bookset";
+    getBook(genre:string) {
+        debugger;
+         var url = "api/bookset/?genre="+genre;
         return this.http.get(url).pipe(map(response =>
             response.json()));
     }

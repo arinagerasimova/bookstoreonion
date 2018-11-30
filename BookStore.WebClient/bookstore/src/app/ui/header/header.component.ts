@@ -44,7 +44,9 @@ export class HeaderComponent implements OnInit {
 
   numberOfOrder() {
     this.orderService.numberOfOrders().subscribe(res => {
-      this.count = res;
+      if(res!=''){
+        this.count = '('+res+')';
+      }
     });
 
   }

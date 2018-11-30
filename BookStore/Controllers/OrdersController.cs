@@ -26,6 +26,16 @@ namespace BookStore.Controllers
             order.BookOrder(book.IdBook, name);
             return Ok();
         }
+
+        [Authorize]
+        [Route("items")]
+        public async Task<IHttpActionResult> GetOrderBook(OrderBook book)
+        {
+            var name = User.Identity.Name;
+            var q = order.OrderBook(name);
+            return Ok(q);
+        }
+
         [Route("count")]
         [AllowAnonymous]
         public string GetNumberOfBook()
@@ -36,6 +46,8 @@ namespace BookStore.Controllers
                 return "";
             return count.ToString();
         }
+
+
 
     }
 
